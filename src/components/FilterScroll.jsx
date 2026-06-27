@@ -10,6 +10,11 @@ export default function FilterScroll({ filters, activeFilter, setActiveFilter })
         <button
           key={index}
           className={`filter-item ${activeFilter === index ? 'active' : ''}`}
+          onMouseEnter={() => {
+            if (typeof setActiveFilter === 'function') {
+              setActiveFilter(index);
+            }
+          }}
           onClick={() => {
             // شرط محافظ حیاتی: فقط اگر تابع وجود داشت آن را اجرا کن تا ارور ندهد
             if (typeof setActiveFilter === 'function') {

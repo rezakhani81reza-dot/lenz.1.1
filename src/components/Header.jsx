@@ -1,12 +1,45 @@
 import React from 'react';
 
-export default function Header({ activePage, setActivePage, setActiveFilter }) {
+// اضافه شدن پراپ onOpenHeaderModal به ورودی‌های هدر
+export default function Header({ activePage, setActivePage, setActiveFilter, cartCount, onOpenCart, onOpenModal }) {
   return (
     <header className="main-header">
-      {/* سمت چپ: دکمه‌های سبد خرید و پروفایل کاربری */}
+      {/* سمت چپ: دکمه‌های سبد خرید و پروفایل کاربری با قابلیت پاپ‌آپ داینامیک */}
       <div className="header-left">
-        <button className="icon-btn">🛒</button>
-        <button className="icon-btn">👤</button>
+        <button 
+          className="icon-btn cart-button"
+          onClick={() => {
+            if (typeof onOpenCart === 'function') {
+              onOpenCart();
+            }
+          }}
+        >
+          🛒
+          {cartCount > 0 && <span className="cart-count-badge">{cartCount}</span>}
+        </button>
+
+        <button 
+          className="icon-btn"
+          onClick={() => {
+            if (typeof onOpenModal === 'function') {
+              onOpenModal('پروفایل کاربری', (
+                <div className="flex flex-col gap-4 text-right" dir="rtl">
+                  <p className="text-sm text-gray-600 dark:text-gray-300">خوش آمدید! هنوز وارد حساب کاربری خود نشده‌اید.</p>
+                  <div className="flex gap-2 justify-start mt-2">
+                    <button className="rounded bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700">
+                      ورود به حساب
+                    </button>
+                    <button className="rounded border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-white hover:bg-gray-50">
+                      ثبت‌نام
+                    </button>
+                  </div>
+                </div>
+              ));
+            }
+          }}
+        >
+          👤
+        </button>
       </div>
 
       {/* سمت راست: منوهای ناوبری شیک وب‌سایت */}

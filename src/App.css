@@ -1,21 +1,20 @@
-بفرما! این نسخه کامل و یکپارچه فایل **`src/App.css`** است که با درخواست جدیدت (حذف نوشته‌ها و فیکس شدن روی ۱۶ کارت همراه با اسکرول داخلی منظم) کاملاً بهینه‌سازی شده است.
-
-کدهای قبلی داخل `App.css` را کاملاً پاک کن و این نسخه نهایی را جایگزین کن:
-
-```css
 /* ==========================================
    ۱. تنظیمات پایه و متغیرهای مدرن (ترند ۲۰۲۶)
    ========================================== */
 :root {
-  --bg-main: #f1f5f9;
-  --text-dark : #0f172a;
-  --text-muted : #64748b;
+  --bg-main: #08162f;
+  --text-dark : #f8fafc;
+  --text-muted : #a8b4d1;
   --accent-orange : linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
   --accent-orange-hover: linear-gradient(135deg, #fb8500 0%, #d06d00 100%);
-  --green-light: rgba(220, 252, 231, 0.7); /* فریم سبز شیشه‌ای و نیمه‌شفاف */
-  --green-card: linear-gradient(135deg, #22c55e 0%, #15803d 100%); /* گرادینت کارت‌ها */
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.5);
+  --navy-bg: #09182f;
+  --navy-panel: rgba(7, 18, 41, 0.95);
+  --navy-border: rgba(255, 255, 255, 0.08);
+  --navy-spot: rgba(255, 255, 255, 0.24);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.62);
+  --glass-accent: rgba(226, 232, 240, 0.55);
+  --carousel-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(248, 250, 252, 0.76) 45%, rgba(229, 231, 235, 0.65) 100%);
   --radius-lg: 16px;
   --radius-md: 12px;
 }
@@ -29,10 +28,16 @@
 
 body {
   background-color: var(--bg-main);
-  /* هاله‌های نوری ملایم در پس‌زمینه برای عمق دادن به وب‌سایت تک‌صفحه‌ای */
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(255, 183, 3, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(34, 197, 94, 0.1) 0px, transparent 50%);
+  /* پس‌زمینه تیره با گوی‌های سفید محو */
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.14), transparent 13%),
+    radial-gradient(circle at 24% 70%, rgba(255, 255, 255, 0.08), transparent 16%),
+    radial-gradient(circle at 48% 30%, rgba(255, 255, 255, 0.12), transparent 12%),
+    radial-gradient(circle at 72% 16%, rgba(255, 255, 255, 0.1), transparent 14%),
+    radial-gradient(circle at 84% 76%, rgba(255, 255, 255, 0.09), transparent 18%);
+  background-repeat: no-repeat;
+  background-size: 30% 30%, 20% 20%, 18% 18%, 24% 24%, 22% 22%;
+  background-attachment: fixed;
   overflow: hidden; /* جلوگیری از اسکرول عمودی کل صفحه مانیتور ویندوز */
   color: var(--text-dark);
 }
@@ -41,10 +46,12 @@ body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* فیکس بر اساس ارتفاع مانیتور */
+  height: 100vh;
   width: 100vw;
   padding: 20px 40px;
   justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* ==========================================
@@ -54,14 +61,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  background: rgba(10, 20, 45, 0.96);
+  border: 1px solid var(--navy-border);
   padding: 0 40px;
   border-radius: var(--radius-lg);
   height: 70px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
 }
 
 .header-right {
@@ -148,8 +153,8 @@ body {
 }
 
 .filter-item {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--navy-border);
   color: var(--text-muted);
   padding: 10px 24px;
   border-radius: 30px;
@@ -158,14 +163,13 @@ body {
   font-size: 13px;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
 }
 
 .filter-item:hover, .filter-item.active {
-  background: var(--text-dark);
-  background-color: #d0fbe6;
-  color: rgb(74, 58, 58);
-  border-color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.95);
+  color: rgb(30, 41, 59);
+  border-color: rgba(148, 163, 184, 0.35);
   transform: translateY(-5%);
 }
 
@@ -174,33 +178,39 @@ body {
    ========================================== */
 .carousel-section {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
-  flex: 1; /* اشغال تمام فضای میانی مانیتور بین فیلتر و فوتر */
-  height: calc(100vh - 250px); /* محاسبه دقیق فضا مانیتور */
+  flex: 1;
+  min-height: 0;
+  height: calc(100vh - 250px);
   position: relative;
+  gap: 12px;
 }
 
 .carousel-arrow {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   width: 50px;
   height: 50px;
   border-radius: 50%;
   font-size: 18px;
-  color: #fb8500;
+  color: var(--text-dark);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
   z-index: 10;
+  align-self: center;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .carousel-arrow:hover:not(:disabled) {
-  background: var(--text-dark);
-  color: white;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-dark);
   transform: scale(1.1);
 }
 
@@ -214,52 +224,90 @@ body {
   height: 100%;
   overflow: hidden;
   direction: ltr; /* فیکس کردن جهت فریم بیرونی برای اسکرول افقی استاندارد بدون خرابی در RTL */
+  padding: 8px;
+  border-radius: 28px;
+  background: var(--navy-panel);
+  border: 1px solid var(--navy-border);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 25px 65px rgba(0, 0, 0, 0.28);
+  position: relative;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.carousel-window::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.28), transparent 14%),
+    radial-gradient(circle at 85% 12%, rgba(255, 255, 255, 0.22), transparent 12%),
+    radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.2), transparent 16%),
+    radial-gradient(circle at 70% 75%, rgba(255, 255, 255, 0.16), transparent 20%);
+  background-size: 180% 180%, 150% 150%, 170% 170%, 200% 200%;
+  background-position: 10% 10%, 100% 5%, 10% 90%, 95% 95%;
+  opacity: 0.45;
+  pointer-events: none;
+  animation: carouselBubble 18s linear infinite;
 }
 
 .carousel-track {
   display: flex;
   height: 100%;
-  width: 100%;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* افکت نرم شبیه انیمیشن‌های اپل */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .carousel-slide {
-  min-width: 100%;
+  flex-shrink: 0;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  direction: rtl; /* بازگرداندن جهت به راست به چپ برای کارت‌ها و متون فارسی */
+  align-items: stretch;
+  padding: 8px;
+  direction: rtl;
+  box-sizing: border-box;
 }
 
+.carousel-slide .frame-container {
+  background: rgba(8, 20, 40, 0.92);
+  border: 1px solid var(--navy-border);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.24);
+  transition: transform 0.32s ease, box-shadow 0.32s ease, background 0.32s ease;
+}
+
+.carousel-slide .frame-container:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.3);
+  background: rgba(8, 24, 46, 0.98);
+}
 /* ==========================================
-   ۵. کانتینر فریم سبز بزرگ (FrameContainer)
+   ۵. کانتینر فریم بزرگ (FrameContainer)
    ========================================== */
 .frame-container {
-  background: var(--green-light);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(7, 16, 38, 0.94);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid var(--navy-border);
   width: 100%;
   height: 100%;
+  min-height: 0;
   border-radius: 24px;
   display: flex;
   flex-direction: column;
-  padding: 30px; /* پدینگ یکدست هندسی به دلیل حذف کامل متون */
+  padding: 20px;
   direction: rtl;
-  justify-content: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  justify-content: flex-start;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+  box-sizing: border-box;
 }
 
-/* بخش میانی فریم - فعال بودن اسکرول عمودی اختصاصی محلی برای ۱۶ کارت */
+/* بخش میانی فریم - اسکرول عمودی برای ۱۶ کارت */
 .frame-content {
   flex: 1;
-  display: block; /* تبدیل به block برای کارکرد درست اسکرول گرید */
+  display: block;
   width: 100%;
-  height: 100%;
-  overflow-y: auto; /* اسکرول عمودی همیشه فعال برای دسترسی به ردیف‌های پایین کارت‌ها */
-  padding-right: 10px; /* ایجاد فضا تا اسکرول‌بار روی کارت‌ها نیفتد */
+  min-height: 0;
+  overflow-y: auto;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 /* زیباسازی اسکرول‌بار اختصاصی و شیک کادر سبز */
@@ -272,35 +320,214 @@ body {
 }
 
 /* ==========================================
-   ۶. گرید کارت‌ها و پلاک‌های لوکس عمودی (Cards)
+   ۶. گرید کارت‌ها و کارت محصول (Product Cards)
    ========================================== */
 .grid-layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  /* محاسبه هوشمند ارتفاع ردیف‌ها بر اساس ارتفاع مانیتور ویندوز */
-  grid-auto-rows: calc((100vh - 340px) / 2); 
-  gap: 25px;
+  grid-template-columns: repeat(3, minmax(190px, 260px));
+  justify-content: center;
+  align-content: start;
+  gap: 24px 28px;
   width: 100%;
-  padding-bottom: 10px; /* فضای تنفس در انتهای اسکرول */
+  padding: 12px 14px 20px;
+  box-sizing: border-box;
 }
 
-/* کارت‌های مستطیلی عمودی متناسب با تصویر طرح شما */
-.card-item {
-  background: var(--green-card);
-  border-radius: var(--radius-lg);
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 18px 16px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.28);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.35), transparent 14%),
+    radial-gradient(circle at 78% 15%, rgba(255, 255, 255, 0.26), transparent 10%),
+    radial-gradient(circle at 28% 80%, rgba(255, 255, 255, 0.22), transparent 14%),
+    radial-gradient(circle at 68% 72%, rgba(255, 255, 255, 0.16), transparent 18%);
+  opacity: 0.42;
+  pointer-events: none;
+  z-index: 0;
+  animation: productCardGlow 18s linear infinite;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.32);
+}
+
+.product-card-image-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.product-card-image {
   width: 100%;
   height: 100%;
-  max-width: 180px; /* جلوگیری از عریض شدن نامتناسب پلاک‌ها */
-  justify-self: center;
-  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
 }
 
-/* انیمیشن لایت و هاور کارت‌ها */
-.card-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 35px rgba(21, 128, 61, 0.35);
+.product-card-title {
+  margin: 12px 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f8fafc;
+  text-align: center;
+  line-height: 1.4;
+  min-height: 2.8em;
+  z-index: 1;
+}
+
+.product-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.product-card-btn {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 18px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.product-card-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.03);
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #08162f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0 5px;
+}
+
+.cart-button {
+  position: relative;
+}
+
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.cart-modal-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cart-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cart-modal-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.cart-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.cart-item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.cart-item-title {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-quantity-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  color: #f8fafc;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cart-quantity-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.cart-item-quantity {
+  min-width: 28px;
+  text-align: center;
+  color: #f8fafc;
+}
+
+.cart-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* ==========================================
@@ -383,7 +610,7 @@ body {
 .social-circle {
   width: 65px;
   height: 65px;
-  background-color: #ccedd5; /* رنگ سبز ملایم دایره‌ها مطابق تصویر شما */
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -392,7 +619,7 @@ body {
 
 .social-circle:hover {
   transform: scale(1.1);
-  background-color: #22c55e;
+  background-color: rgba(226, 232, 240, 0.9);
 }
 
 .social-item span {
@@ -430,7 +657,7 @@ body {
   border-radius: 20px;
   font-weight: 700;
   font-size: 14px;
-  color: #15803d;
+  color: var(--text-dark);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
@@ -525,10 +752,10 @@ body {
 .main-content-wrapper {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   width: 100%;
-  min-height: calc(100vh - 200px);
+  min-height: 0;
 }
 
 /* ==========================================
@@ -574,13 +801,13 @@ body {
 .help-guide-card {
   position: relative;
   width: 85%;
-  background: rgba(186, 230, 201, 0.35); /* سبز لایت شیشه‌ای مات الهام گرفته از قالب شما */
-  border: 1px solid rgba(186, 230, 201, 0.6);
+  background: rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(148, 163, 184, 0.18);
   padding: 24px 32px;
   border-radius: 16px;
   font-size: 20px;
   font-weight: 700;
-  color: #166534;
+  color: var(--text-dark);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -591,8 +818,8 @@ body {
 
 .help-guide-card:hover {
   transform: translateX(-8px);
-  background: rgba(186, 230, 201, 0.55);
-  box-shadow: 0 12px 25px rgba(22, 101, 52, 0.1);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
 }
 
 .card-arrow-icon {
@@ -760,8 +987,8 @@ body {
 .mini-badge-glow:hover {
   transform: translateY(-2px);
   background: #ffffff;
-  border-color: rgba(34, 197, 94, 0.4);
-  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.15);
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: 0 4px 10px rgba(100, 116, 139, 0.15);
 }
 
 
@@ -799,7 +1026,7 @@ body {
 }
 
 .blog-scroll-viewport::-webkit-scrollbar-thumb {
-  background: rgba(186, 230, 201, 0.7); /* استفاده از سبز ملایم تم شما */
+  background: rgba(226, 232, 240, 0.7);
   border-radius: 10px;
 }
 
@@ -828,13 +1055,13 @@ body {
   transform: translateY(-6px);
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
-  border-color: rgba(34, 197, 94, 0.3);
+  border-color: rgba(148, 163, 184, 0.3);
 }
 
 .article-image-placeholder {
   width: 100%;
   height: 140px;
-  background: rgba(186, 230, 201, 0.25); /* لایت سبز هماهنگ */
+  background: rgba(226, 232, 240, 0.25);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -867,7 +1094,7 @@ body {
 .read-more-btn {
   background: none;
   border: none;
-  color: #166534;
+  color: var(--text-dark);
   font-weight: 700;
   font-size: 13px;
   cursor: pointer;
@@ -877,13 +1104,228 @@ body {
 }
 
 .read-more-btn:hover {
-  color: #22c55e;
+  color: var(--text-dark);
 }
 
 /* ریسپانسیو برای تبلت و موبایل */
+@media (max-width: 1024px) {
+  .grid-layout {
+    grid-template-columns: repeat(3, minmax(140px, 170px));
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-columns: repeat(2, minmax(140px, 170px));
+  }
+}
+
 @media (max-width: 1024px) {
   .blog-grid-layout { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 650px) {
   .blog-grid-layout { grid-template-columns: 1fr; }
 }
+
+/* ==========================================
+   استایل‌های اختصاصی مدال پاپ‌آپ (بدون نیاز به Tailwind)
+   ========================================== */
+
+/* استایل بدنه اصلی پاپ‌آپ با انیمیشن ظهور */
+.custom-modal {
+  margin: auto;
+  max-width: 500px;
+  width: 90%;
+  border: none;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 26px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.32s ease, opacity 0.32s ease;
+  transform: translateY(-24px) scale(0.94);
+  opacity: 0;
+  animation: modalPop 0.32s ease forwards;
+}
+
+.custom-modal[open] {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* افکت تیره و شیشه‌ای پشت پاپ‌آپ (Backdrop) */
+.custom-modal::backdrop {
+  background: rgba(8, 12, 25, 0.85);
+  background-image:
+    radial-gradient(circle at 15% 22%, rgba(255, 255, 255, 0.14), transparent 14%),
+    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.08), transparent 12%),
+    radial-gradient(circle at 40% 75%, rgba(255, 255, 255, 0.1), transparent 16%),
+    radial-gradient(circle at 88% 78%, rgba(255, 255, 255, 0.06), transparent 20%),
+    radial-gradient(circle at 52% 50%, rgba(40, 55, 85, 0.24), transparent 18%),
+    radial-gradient(circle at 30% 40%, rgba(20, 30, 50, 0.35), transparent 12%);
+  background-blend-mode: overlay;
+  background-position: 0% 0%, 100% 10%, 0% 100%, 100% 100%, 25% 35%, 70% 55%;
+  background-size: 220% 220%, 200% 200%, 180% 180%, 240% 240%, 160% 160%, 140% 140%;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, opacity 0.35s ease;
+  animation: backdropFloat 18s linear infinite, backdropGlow 0.45s ease forwards;
+  opacity: 0;
+}
+
+.custom-modal[open]::backdrop {
+  opacity: 1;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  direction: ltr; /* هماهنگ با متن انگلیسی داخل مدال شما */
+  color: #111 !important;
+}
+
+.custom-modal,
+.custom-modal * {
+  color: #111 !important;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111 !important;
+  margin: 0;
+}
+
+.modal-description {
+  font-size: 14px;
+  color: #111 !important;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1e293b;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+/* دکمه‌های پایین مدال */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-cancel {
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #e2e8f0;
+}
+
+@keyframes modalPop {
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes backdropGlow {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes backdropFloat {
+  0% {
+    background-position: 0% 0%, 100% 10%, 0% 100%, 100% 100%, 25% 35%, 70% 55%;
+  }
+  50% {
+    background-position: 10% 15%, 95% 20%, 5% 95%, 90% 85%, 30% 45%, 65% 60%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 10%, 0% 100%, 100% 100%, 25% 35%, 70% 55%;
+  }
+}
+
+@keyframes carouselBubble {
+  0% {
+    background-position: 0% 0%, 100% 5%, 10% 90%, 95% 95%;
+  }
+  50% {
+    background-position: 5% 5%, 95% 10%, 15% 85%, 90% 90%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 5%, 10% 90%, 95% 95%;
+  }
+}
+
+@keyframes productCardGlow {
+  0% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateY(-2px);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+}
+
+.btn-done {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-done:hover {
+  background: #1d4ed8;
+}
+
